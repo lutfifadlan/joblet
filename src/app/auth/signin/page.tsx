@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
@@ -223,21 +222,6 @@ const SignIn: React.FC = () => {
               {isLoading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
-          <div className="mt-4 text-center">
-            <div className="relative flex items-center">
-              <Separator className="flex-1" />
-              <p className="px-4 text-sm text-muted-foreground">Or</p>
-              <Separator className="flex-1" />
-            </div>
-            <Link href="/auth/magic-link" className="block mt-2">
-              <Button
-                type="button"
-                className="w-full bg-secondary text-secondary-foreground border border-primary hover:bg-primary hover:text-primary-foreground font-bold py-2 px-4 transition duration-300 ease-in-out cursor-pointer"
-              >
-                Sign In with Magic Link
-              </Button>
-            </Link>
-          </div>
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-primary hover:underline font-semibold">

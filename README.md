@@ -212,7 +212,7 @@ With additional time, these enhancements would be implemented:
 7. **Mobile App**: Native mobile applications for iOS and Android
 8. **AI-Powered Matching**: Intelligent job recommendations based on user profiles
 9. **AI-Powered Job Fetching**: Pull job listings from reliable sources and display them on the job board automatically
-10. **Google Sign In**: Use the Google sign-in for user authentication
+10. **Magic Link and Google Sign In**: Use the magic link and Google sign-in for user authentication
 
 ## Original Task Requirements
 
