@@ -11,7 +11,7 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import { useRouter } from 'next/navigation';
 import { MapPin, Briefcase } from 'lucide-react';
 import Link from 'next/link';
-import Loading from '@/components/loading';
+import Loading from '@/components/loading-component';
 
 export default function JobsPage() {
   const router = useRouter();

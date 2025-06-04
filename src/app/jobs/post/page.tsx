@@ -12,7 +12,7 @@ import { showSuccessToast, showWarningToast, showErrorToast } from "@/lib/toast"
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { AuthGuard } from '@/components/auth-guard';
-import Loading from '@/components/loading';
+import Loading from '@/components/loading-component';
 
 export default function PostJobPage() {
   const router = useRouter();

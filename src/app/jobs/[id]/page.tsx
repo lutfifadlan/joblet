@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, Building, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import Loading from '@/components/loading';
+import Loading from '@/components/loading-component';
 import { useParams } from 'next/navigation';
 
 export default function JobDetailPage() {

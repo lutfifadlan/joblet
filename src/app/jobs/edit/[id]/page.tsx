@@ -13,7 +13,7 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Job } from '@/types/job';
 import { AuthGuard } from '@/components/auth-guard';
-import Loading from '@/components/loading';
+import Loading from '@/components/loading-component';
 import { useParams } from 'next/navigation';
 
 export default function EditJobPage() {

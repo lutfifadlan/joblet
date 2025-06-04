@@ -15,7 +15,7 @@ import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern"
 import { cn } from "@/lib/utils";
 import { Common } from "@/constants";
 import { Particles } from "@/components/magicui/particles";
-import Loading from "@/components/loading";
+import Loading from "@/components/loading-component";
 import { Eye, EyeOff } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 
