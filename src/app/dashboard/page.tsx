@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { LogOut, Menu, Moon, Settings, Sun, Home, Briefcase } from 'lucide-react';
+import { LogOut, Menu, Moon, Settings, Sun, Briefcase } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import ProfileSettings from '@/components/profile-settings';
 import { useRouter } from 'next/navigation';
@@ -9,7 +9,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -17,10 +16,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import Image from 'next/image';
-import { Common } from '@/constants'
 import { useTheme } from "next-themes"
-import Link from 'next/link';
 import { JobManagement } from '@/components/job-management';
 import { AuthGuard } from '@/components/auth-guard';
 
@@ -41,16 +37,6 @@ const Dashboard = () => {
       <SidebarProvider>
       <Sidebar>
         {/* Sidebar content */}
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <Link href="/" className="flex items-center justify-center space-x-3 p-2">
-                <Image src={Common.logo} alt="logo" width={30} height={30} />
-                <span className="font-semibold text-lg">{Common.title}</span>
-              </Link>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent>
@@ -65,20 +51,6 @@ const Dashboard = () => {
                     <Button variant="ghost" className="w-full justify-start">
                       <Briefcase className="mr-2 h-4 w-4" />
                       My Jobs
-                    </Button>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-
-                <SidebarMenuItem>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={activeTab === 'home'}
-                    onClick={() => setActiveTab('home')}
-                    className="cursor-pointer"
-                  >
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Home className="mr-2 h-4 w-4" />
-                      Home
                     </Button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
