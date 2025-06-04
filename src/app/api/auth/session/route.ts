@@ -7,19 +7,20 @@ const prisma = new PrismaClient()
 export async function GET() {
   try {
     const supabase = await createClient();
-    const { data: { session }, error } = await supabase.auth.getSession();
+    
+    const { data: { user }, error } = await supabase.auth.getUser();
 
     if (error) {
       return NextResponse.json({ error: error.message, valid: false }, { status: 401 });
     }
 
-    if (!session) {
+    if (!user) {
       return NextResponse.json({ valid: false }, { status: 401 });
     }
     
     // Ensure user exists in Prisma database
     try {
-      const { id, email, user_metadata } = session.user;
+      const { id, email, user_metadata } = user;
       const name = user_metadata?.full_name || user_metadata?.name || email?.split('@')[0] || 'User';
       
       // Check if user already exists in Prisma
@@ -44,8 +45,7 @@ export async function GET() {
 
     return NextResponse.json({
       valid: true,
-      user: session.user,
-      expires: session.expires_at
+      user,
     }, { status: 200 });
   } catch (error: unknown) {
     let errorMessage = 'Internal server error';

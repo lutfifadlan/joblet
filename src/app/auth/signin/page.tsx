@@ -17,7 +17,6 @@ import { Common } from "@/constants";
 import { Particles } from "@/components/magicui/particles";
 import Loading from "@/components/loading-component";
 import { Eye, EyeOff } from 'lucide-react';
-import { FcGoogle } from 'react-icons/fc';
 
 const SearchParamsHandler = ({ onParamsReady }: { onParamsReady: (callbackUrl: string, verified: string | null) => void }) => {
   const searchParams = useSearchParams();
@@ -120,29 +119,6 @@ const SignIn: React.FC = () => {
       console.error(error);
       toast.error("An unexpected error occurred. Please try again.");
     } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch('/api/auth/google');
-      const result = await response.json();
-      
-      if (result.error) {
-        throw new Error(result.error);
-      }
-      
-      if (result.data && result.data.url) {
-        // Redirect to the OAuth URL provided by Supabase
-        window.location.href = result.data.url;
-      } else {
-        throw new Error('Invalid response from server');
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to initiate Google sign-in. Please try again.");
       setIsLoading(false);
     }
   };
@@ -253,7 +229,7 @@ const SignIn: React.FC = () => {
               <p className="px-4 text-sm text-muted-foreground">Or</p>
               <Separator className="flex-1" />
             </div>
-            <Link href="/magic-link" className="block mt-2">
+            <Link href="/auth/magic-link" className="block mt-2">
               <Button
                 type="button"
                 className="w-full bg-secondary text-secondary-foreground border border-primary hover:bg-primary hover:text-primary-foreground font-bold py-2 px-4 transition duration-300 ease-in-out cursor-pointer"
@@ -261,21 +237,6 @@ const SignIn: React.FC = () => {
                 Sign In with Magic Link
               </Button>
             </Link>
-          </div>
-          <div className="mt-4 text-center">
-            <div className="relative flex items-center">
-              <Separator className="flex-1" />
-              <p className="px-4 text-sm text-muted-foreground">Or continue with</p>
-              <Separator className="flex-1" />
-            </div>
-            <Button
-              type="button"
-              className="w-full mt-4 bg-white text-gray-800 border border-gray-300 hover:bg-gray-100 font-medium py-2 px-4 transition duration-300 ease-in-out cursor-pointer flex items-center justify-center space-x-2 dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700"
-              onClick={handleGoogleSignIn}
-            >
-              <FcGoogle className="h-5 w-5" />
-              <span>Sign in with Google</span>
-            </Button>
           </div>
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{' '}

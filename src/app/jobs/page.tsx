@@ -123,6 +123,7 @@ export default function JobsPage() {
           variant="outline" 
           size="sm" 
           onClick={() => handleJobClick(job.id)}
+          className="cursor-pointer"
         >
           <Briefcase className="mr-2 h-4 w-4" />
           View Job
@@ -137,7 +138,7 @@ export default function JobsPage() {
       <div className="relative container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Job Listings</h1>
-          <Link href="/jobs/post">
+          <Link href="/jobs/post" className="cursor-pointer">
             <Button>Post a Job</Button>
           </Link>
         </div>
@@ -164,8 +165,8 @@ export default function JobsPage() {
               <SelectItem value="CONTRACT">Contract</SelectItem>
             </SelectContent>
           </Select>
-          <Button onClick={handleApplyFilters}>Apply Filters</Button>
-          <Button variant="outline" onClick={handleResetFilters}>Reset</Button>
+          <Button onClick={handleApplyFilters} className="cursor-pointer">Apply Filters</Button>
+          <Button variant="outline" onClick={handleResetFilters} className="cursor-pointer">Reset</Button>
         </div>
 
         {/* Jobs grid */}

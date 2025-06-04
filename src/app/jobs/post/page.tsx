@@ -8,9 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { showSuccessToast, showWarningToast, showErrorToast } from "@/lib/toast";
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { showSuccessToast, showWarningToast, showErrorToast } from "@/lib/toast";;
 import { AuthGuard } from '@/components/auth-guard';
 import Loading from '@/components/loading-component';
 
@@ -75,15 +73,6 @@ export default function PostJobPage() {
   return (
     <AuthGuard>
       <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
-        <Link href="/jobs">
-          <Button variant="ghost" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Jobs
-          </Button>
-        </Link>
-      </div>
-
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl">Post a New Job</CardTitle>
@@ -136,13 +125,13 @@ export default function PostJobPage() {
                 onValueChange={(value) => handleSelectChange('jobType', value)}
                 required
               >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select job type" />
+                <SelectTrigger className="cursor-pointer">
+                  <SelectValue placeholder="Select job type"/>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="FULL_TIME">Full-Time</SelectItem>
-                  <SelectItem value="PART_TIME">Part-Time</SelectItem>
-                  <SelectItem value="CONTRACT">Contract</SelectItem>
+                  <SelectItem value="FULL_TIME" className="cursor-pointer">Full-Time</SelectItem>
+                  <SelectItem value="PART_TIME" className="cursor-pointer">Part-Time</SelectItem>
+                  <SelectItem value="CONTRACT" className="cursor-pointer">Contract</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -155,18 +144,15 @@ export default function PostJobPage() {
                 placeholder="Describe the job responsibilities, requirements, and benefits..."
                 value={formData.description}
                 onChange={handleChange}
-                rows={8}
+                rows={48}
                 required
               />
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full cursor-pointer mt-4" disabled={loading}>
               {loading ? (
-                <>
-                  <Loading size="small" />
-                  <span className="ml-2">Posting...</span>
-                </>
+                <Loading size="xs" message='Posting...' />
               ) : (
                 'Post Job'
               )}

@@ -65,7 +65,7 @@ export default function JobDetailPage() {
           <h2 className="text-2xl font-bold text-red-500 mb-4">Error</h2>
           <p>{error}</p>
           <Link href="/jobs" className="mt-4 inline-block">
-            <Button variant="outline">
+            <Button variant="outline" className="cursor-pointer">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Jobs
             </Button>
@@ -81,12 +81,6 @@ export default function JobDetailPage() {
         <div className="text-center py-8">
           <h2 className="text-2xl font-bold mb-4">Job Not Found</h2>
           <p>The job you&apos;re looking for doesn&apos; exist or has been removed.</p>
-          <Link href="/jobs" className="mt-4 inline-block">
-            <Button variant="outline">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Jobs
-            </Button>
-          </Link>
         </div>
       </div>
     );
@@ -94,15 +88,6 @@ export default function JobDetailPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
-        <Link href="/jobs">
-          <Button variant="ghost" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Jobs
-          </Button>
-        </Link>
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main content */}
         <div className="lg:col-span-2">

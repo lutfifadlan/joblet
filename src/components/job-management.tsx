@@ -174,7 +174,7 @@ export const JobManagement = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">My Job Listings</h2>
-        <Button onClick={() => router.push('/jobs/post')}>Post a New Job</Button>
+        <Button onClick={() => router.push('/jobs/post')} className="cursor-pointer">Post a New Job</Button>
       </div>
 
       {/* Jobs grid */}

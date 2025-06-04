@@ -153,7 +153,7 @@ export function MainNav() {
               </Link>
             );
           })}
-          <div className="ml-2">
+          <div>
             <ThemeToggle />
           </div>
         </nav>

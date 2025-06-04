@@ -21,7 +21,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import CustomBackground from './custom-ui/backgrounds/custom';
 import { useRouter } from 'next/navigation';
 
 interface UserData {
@@ -175,7 +174,6 @@ const ProfileSettings: React.FC = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-start justify-center space-y-8 md:space-y-0 md:space-x-8">
-      <CustomBackground type="dot" />
       <Card className="w-full md:w-1/2 min-h-[330px] z-10">
         <CardHeader>
           <CardTitle>Account Information</CardTitle>

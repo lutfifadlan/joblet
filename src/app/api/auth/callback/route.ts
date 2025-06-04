@@ -28,8 +28,11 @@ export async function GET(req: NextRequest) {
       throw new Error(sessionError?.message || 'Failed to exchange code for session');
     }
     
-    // Redirect to the specified destination or dashboard by default
-    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`);
+    // Redirect to the dashboard
+    // Use requestUrl.origin as fallback if NEXT_PUBLIC_BASE_URL is not available
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || requestUrl.origin;
+    console.log('Redirecting to dashboard with baseUrl:', baseUrl);
+    return NextResponse.redirect(`${baseUrl}/dashboard`);
   } catch (error: unknown) {
     console.error('Error in auth callback:', error);
     let errorMessage = 'Authentication failed';

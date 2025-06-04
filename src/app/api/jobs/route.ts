@@ -18,7 +18,12 @@ export async function GET(request: NextRequest) {
 
     // Build filter conditions
     const where: Prisma.PostWhereInput = { published: true };
-    if (location) where.location = location;
+    if (location) {
+      where.location = {
+        contains: location,
+        mode: 'insensitive'
+      };
+    }
     
     // Only apply job type filter if it's a valid enum value
     if (jobTypeParam && ['FULL_TIME', 'PART_TIME', 'CONTRACT'].includes(jobTypeParam)) {
