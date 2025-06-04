@@ -16,7 +16,7 @@ const GetStartedButton = () => {
       spread: 70,
       origin: { y: 0.6 },
     });
-    router.push('/signin');
+    router.push('/auth/signin');
   }, [router]);
 
   return (

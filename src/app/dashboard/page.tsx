@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { LogOut, Menu, Moon, Settings, Sun, Home } from 'lucide-react';
+import { LogOut, Menu, Moon, Settings, Sun, Home, Briefcase } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import ProfileSettings from '@/components/profile-settings';
 import { useRouter } from 'next/navigation';
@@ -21,22 +21,24 @@ import Image from 'next/image';
 import { Common } from '@/constants'
 import { useTheme } from "next-themes"
 import Link from 'next/link';
-import { DashboardHome } from '@/components/dashboard-home';
+import { JobManagement } from '@/components/job-management';
+import { AuthGuard } from '@/components/auth-guard';
 
 const Dashboard = () => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('jobs');
   const { setTheme, theme } = useTheme()
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', {
       method: 'GET',
     });
-    router.push('/signin');
+    router.push('/auth/signin');
   }
 
   return (
-    <SidebarProvider>
+    <AuthGuard>
+      <SidebarProvider>
       <Sidebar>
         {/* Sidebar content */}
         <SidebarHeader>
@@ -53,7 +55,20 @@ const Dashboard = () => {
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
-                {/* Rest of menu items remain the same */}
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={activeTab === 'jobs'}
+                    onClick={() => setActiveTab('jobs')}
+                    className="cursor-pointer"
+                  >
+                    <Button variant="ghost" className="w-full justify-start">
+                      <Briefcase className="mr-2 h-4 w-4" />
+                      My Jobs
+                    </Button>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+
                 <SidebarMenuItem>
                   <SidebarMenuButton
                     asChild
@@ -129,14 +144,15 @@ const Dashboard = () => {
           </SidebarTrigger>
         </div>
 
-        {activeTab === 'home' && (
-          <DashboardHome />
+        {activeTab === 'jobs' && (
+          <JobManagement />
         )}
         {activeTab === 'settings' && (
           <ProfileSettings />
         )}
       </div>
     </SidebarProvider>
+    </AuthGuard>
   );
 };
 

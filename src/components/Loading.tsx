@@ -1,22 +1,32 @@
 import React from "react";
+import { Loader2 } from "lucide-react";
 
 interface LoadingProps {
   message?: string;
   fullscreen?: boolean;
+  size?: 'small' | 'medium' | 'large';
 }
 
-const Loading: React.FC<LoadingProps> = ({ message = "Loading...", fullscreen = true }) => {
+const Loading: React.FC<LoadingProps> = ({ 
+  message = "Loading...", 
+  fullscreen = true,
+  size = 'medium' 
+}) => {
+  const sizeMap = {
+    small: 'h-4 w-4',
+    medium: 'h-8 w-8',
+    large: 'h-12 w-12',
+  };
+
   return (
     <div
-      className={`flex flex-col items-center justify-center ${fullscreen ? "h-screen w-full" : "py-8 w-full"} bg-opacity-60 backdrop-blur-sm`}
+      className={`flex flex-col items-center justify-center ${fullscreen ? "h-[calc(100vh-8rem)] w-full" : "py-8 w-full"}`}
       data-testid="loading-component"
     >
-      <div className="relative flex items-center justify-center mb-4">
-        <span className="sr-only dark:text-white">Loading</span>
-        <span className="w-14 h-14 border-4 border-primary border-t-transparent rounded-full animate-spin shadow-lg"></span>
-        <span className="absolute w-7 h-7 bg-primary rounded-full opacity-70 animate-pulse"></span>
-      </div>
-      <span className="text-lg font-semibold text-gray-800 dark:text-white animate-pulse">{message}</span>
+      <Loader2 className={`${sizeMap[size]} animate-spin text-primary mb-2`} />
+      {message && (
+        <span className="text-sm font-medium text-muted-foreground">{message}</span>
+      )}
     </div>
   );
 };

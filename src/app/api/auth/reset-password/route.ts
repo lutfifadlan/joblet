@@ -1,27 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8080'
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(request: NextRequest) {
     try {
+        const supabase = await createClient()
         const body = await request.json()
-        const { token, new_password } = body
+        const { password } = body
 
-        const response = await fetch(`${BACKEND_URL}/api/v1/auth/reset-password?token=${token}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ new_password }),
+        if (!password) {
+            return NextResponse.json(
+                { error: 'New password is required' },
+                { status: 400 }
+            )
+        }
+
+        // Supabase handles the token through cookies automatically
+        const { error } = await supabase.auth.updateUser({
+            password
         })
 
-        if (!response.ok) {
-            throw new Error('Failed to reset password')
+        if (error) {
+            return NextResponse.json(
+                { error: error.message },
+                { status: error.status || 400 }
+            )
         }
 
         return NextResponse.json({ message: 'Password reset successfully' })
     } catch (error) {
         console.error(error)
-        return NextResponse.json({ error: 'Failed to reset password' }, { status: 500 })
+        let errorMessage = 'Failed to reset password'
+        if (error instanceof Error) {
+            errorMessage = error.message
+        }
+        return NextResponse.json({ error: errorMessage }, { status: 500 })
     }
 }

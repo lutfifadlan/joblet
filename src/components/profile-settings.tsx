@@ -131,7 +131,7 @@ const ProfileSettings: React.FC = () => {
       const response = await fetch('/api/auth/session');
 
       if (!response.ok) {
-        router.replace('/signin');
+        router.replace('/auth/signin');
         return;
       }
 
