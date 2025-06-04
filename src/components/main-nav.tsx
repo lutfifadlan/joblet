@@ -131,7 +131,7 @@ export function MainNav() {
                 key={route.href}
                 onClick={route.onClick}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary flex items-center",
+                  "cursor-pointer font-medium transition-colors hover:text-primary flex items-center",
                   route.active ? "text-primary" : "text-muted-foreground"
                 )}
               >
@@ -143,7 +143,7 @@ export function MainNav() {
                 key={route.href}
                 href={route.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary flex items-center",
+                  "font-medium transition-colors hover:text-primary flex items-center",
                   route.active ? "text-primary" : "text-muted-foreground"
                 )}
               >
@@ -186,7 +186,7 @@ export function MainNav() {
                   <button
                     key={route.href}
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary flex items-center p-2 w-full text-left",
+                      "cursor-pointer font-medium transition-colors hover:text-primary flex items-center p-2 w-full text-left",
                       route.active ? "text-primary bg-muted" : "text-muted-foreground"
                     )}
                     onClick={() => {
@@ -202,7 +202,7 @@ export function MainNav() {
                     key={route.href}
                     href={route.href}
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary flex items-center p-2",
+                      "font-medium transition-colors hover:text-primary flex items-center p-2",
                       route.active ? "text-primary bg-muted" : "text-muted-foreground"
                     )}
                     onClick={() => setIsMenuOpen(false)}

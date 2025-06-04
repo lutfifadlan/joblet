@@ -97,9 +97,7 @@ Joblet is a modern job board application built with Next.js, Prisma, and Supabas
 3. **Company Profiles** - Add dedicated company profile pages
 4. **Email Notifications** - Send notifications for new job postings or applications
 5. **Analytics Dashboard** - Provide insights for job posters about views and applications
-6. **Mobile App** - Develop a companion mobile app using React Native
-7. **Testing** - Add comprehensive unit and integration tests
-8. **Accessibility** - Further improve accessibility compliance
+6. **Testing** - Add comprehensive unit and integration tests
 
 ## Original Task Requirements
 

@@ -19,15 +19,15 @@ export default function Footer() {
               {Common.description}
             </p>
             <div className="flex space-x-3">
-              <Link href="https://github.com" className="text-muted-foreground hover:text-foreground">
+              <Link href="https://github.com/lutfifadlan/joblet" className="text-muted-foreground hover:text-foreground">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
-              <Link href="https://twitter.com" className="text-muted-foreground hover:text-foreground">
+              <Link href="https://x.com/mlutfifadlan" className="text-muted-foreground hover:text-foreground">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="https://linkedin.com" className="text-muted-foreground hover:text-foreground">
+              <Link href="https://linkedin.com/in/lutfifadlan" className="text-muted-foreground hover:text-foreground">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
