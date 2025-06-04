@@ -4,11 +4,15 @@
 
 ## Overview
 
-Joblet is a modern job board application built with Next.js, Prisma, and Supabase. It allows companies to post job listings and users to browse and filter available positions. The application features a clean, responsive UI with authentication, job management, and search functionality.
+Joblet is a modern job board application built with Next.js 14, Prisma ORM, and Supabase. It enables companies to post job listings and users to browse and filter available positions based on location and job type. The application features a clean, responsive UI with secure authentication, comprehensive job management, and efficient search functionality.
 
 ## Live Demo
 
 [View the live demo](https://joblet-omega.vercel.app)
+
+## GitHub Repository
+
+[View the GitHub repository](https://github.com/lutfifadlan/joblet)
 
 ## Features
 
@@ -30,77 +34,184 @@ Joblet is a modern job board application built with Next.js, Prisma, and Supabas
 
 ## Setup Instructions
 
-1. **Clone the repository**
+### Prerequisites
 
-   ```bash
-   git clone https://github.com/yourusername/joblet.git
-   cd joblet
-   ```
+- Node.js 18+ or [Bun](https://bun.sh/) installed
+- Supabase account (for database and authentication)
+- Git
 
-2. **Install dependencies**
+### Step 1: Clone the repository
 
-   ```bash
-   npm install
-   # or
-   bun install
-   ```
+```bash
+git clone https://github.com/lutfifadlan/joblet.git
+cd joblet
+```
 
-3. **Set up environment variables**
+### Step 2: Install dependencies
 
-   Create a `.env.local` file in the root directory with the following variables:
+Using npm:
+```bash
+npm install
+```
 
-   ```env
-   DATABASE_URL="postgres://[DB-USER].[PROJECT-REF]:[PASSWORD]@[DB-REGION].pooler.supabase.com:5432/postgres"
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   NEXT_PUBLIC_BASE_URL=http://localhost:3000
-   ```
+Or using Bun (recommended for faster installation):
+```bash
+bun install
+```
 
-4. **Run database migrations**
+### Step 3: Set up Supabase
 
-   ```bash
-   npx prisma migrate dev
-   ```
+1. Create a new Supabase project at [supabase.com](https://supabase.com)
+2. Set up authentication providers (Email, Google) in the Supabase dashboard
+3. Create a custom Prisma user in the SQL Editor:
 
-5. **Start the development server**
+```sql
+-- Create custom user
+create user "prisma" with password 'your_secure_password' bypassrls createdb;
 
-   ```bash
-   npm run dev
-   # or
-   bun dev
-   ```
+-- extend prisma's privileges to postgres
+grant "prisma" to "postgres";
 
-6. **Open your browser**
+-- Grant necessary permissions
+grant usage on schema public to prisma;
+grant create on schema public to prisma;
+grant all on all tables in schema public to prisma;
+grant all on all routines in schema public to prisma;
+grant all on all sequences in schema public to prisma;
+alter default privileges for role postgres in schema public grant all on tables to prisma;
+alter default privileges for role postgres in schema public grant all on routines to prisma;
+alter default privileges for role postgres in schema public grant all on sequences to prisma;
+```
 
-   Navigate to [http://localhost:3000](http://localhost:3000)
+### Step 4: Set up environment variables
 
-## Project Structure
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# Database connection (use the prisma user created above)
+DATABASE_URL="postgres://prisma.[PROJECT-REF]:[PASSWORD]@[DB-REGION].pooler.supabase.com:5432/postgres"
+
+# Supabase configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Application URL
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Google OAuth (if using Google authentication)
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+### Step 5: Run database migrations
+
+```bash
+npx prisma migrate dev --name initial
+npx prisma generate
+```
+
+### Step 6: Start the development server
+
+Using npm:
+```bash
+npm run dev
+```
+
+Or using Bun:
+```bash
+bun dev
+```
+
+### Step 7: Open your browser
+
+Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Architecture Overview
+
+### Project Structure
 
 ```text
 /src
   /app                 # Next.js App Router
-    /api               # API routes
-    /dashboard         # User dashboard
-    /jobs              # Job listings and details
-    /auth              # Authentication pages
+    /api               # API routes for server-side operations
+      /auth            # Authentication endpoints
+      /jobs            # Job management endpoints
+      /users           # User endpoint
+      /contacts        # Contact endpoint
+    /dashboard         # User dashboard for managing job posts
+    /jobs              # Job listings and detailed views
+    /auth              # Authentication pages (login, signup)
     /contact-us        # Contact page
     /privacy-policy    # Privacy policy page
     /terms-of-service  # Terms of service page
   /components          # Reusable UI components
+    /ui                # shadcn/ui components
+    /magicui           # magicui components
+    /custom-ui         # custom ui components
   /lib                 # Utility functions and shared code
-  /types               # TypeScript type definitions
+    /supabase          # Supabase client configuration
 /prisma                # Prisma schema and migrations
 /public                # Static assets
 ```
 
-## What Would I Improve With More Time?
+### Technical Architecture
 
-1. **Advanced Search** - Implement full-text search for job listings
-2. **Job Applications** - Allow users to apply for jobs directly through the platform
-3. **Company Profiles** - Add dedicated company profile pages
-4. **Email Notifications** - Send notifications for new job postings or applications
-5. **Analytics Dashboard** - Provide insights for job posters about views and applications
-6. **Testing** - Add comprehensive unit and integration tests
+#### Frontend
+- **Next.js 14 with App Router**: Server-side rendering and client-side navigation
+- **React**: Component-based UI development
+- **TypeScript**: Type safety throughout the application
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **shadcn/ui**: Reusable UI components built on Radix UI
+- **React Hook Form**: Form validation and submission
+
+#### Backend
+- **Next.js API Routes**: Serverless functions for backend operations
+- **Prisma ORM**: Type-safe database access and migrations
+- **Supabase Auth**: Authentication and user management
+- **PostgreSQL**: Relational database (hosted on Supabase)
+
+#### Data Flow
+1. **Authentication**: Users authenticate via Supabase Auth
+2. **Data Access**: Authenticated requests access data through Next.js API routes
+3. **Database Operations**: API routes use Prisma client to interact with PostgreSQL
+4. **Rendering**: Data is rendered server-side or client-side depending on the page requirements
+
+#### Deployment
+- **Vercel**: Hosting platform optimized for Next.js applications
+- **Supabase**: Database and authentication services
+
+## Development Approach
+
+The development of Joblet followed these key principles:
+
+1. **User-Centered Design**: Focusing on creating an intuitive interface for both job posters and job seekers
+2. **Modular Architecture**: Building reusable components and utilities to maintain clean code
+3. **Progressive Enhancement**: Starting with core functionality and iteratively adding features
+4. **Performance Optimization**: Ensuring fast page loads and responsive interactions
+5. **Security First**: Implementing proper authentication and data protection measures
+
+The development process included:
+
+1. **Planning**: Defining requirements and scoping the project
+2. **Setup**: Configuring Next.js, Prisma, and Supabase
+3. **Core Development**: Building authentication, job posting, and browsing features
+4. **UI Implementation**: Creating a responsive and accessible interface
+5. **Testing & Refinement**: Manual testing and bug fixes
+6. **Deployment**: Deploying to Vercel and configuring production environment
+
+## Future Improvements
+
+With additional time, these enhancements would be implemented:
+
+1. **Advanced Search**: Full-text search with relevance ranking for job listings
+2. **Job Applications**: Direct application submission and tracking system
+3. **Company Profiles**: Dedicated pages for companies with branding and multiple job listings
+4. **Email Notifications**: Automated alerts for new jobs matching user preferences
+5. **Analytics Dashboard**: Insights for job posters about views, clicks, and applications
+6. **Testing**: Comprehensive unit, integration, and end-to-end tests
+7. **Mobile App**: Native mobile applications for iOS and Android
+8. **AI-Powered Matching**: Intelligent job recommendations based on user profiles
+9. **AI-Powered Job Fetching**: Pull job listings from reliable sources and display them on the job board automatically
 
 ## Original Task Requirements
 
@@ -222,10 +333,21 @@ npm install @prisma/client
 npx prisma generate
 ```
 
-## Using Bun
+## Performance Optimizations
 
-Use Bun (https://bun.sh) instead of npm. Bun is an all-in-one JavaScript runtime & toolkit designed for speed, complete with a bundler, test runner, and Node.js-compatible package manager.
+Joblet implements several performance optimizations:
 
-- Pre-req: install bun locally
-- Use bun instead of npm for all package.json commands
-- Use bun.lock instead of package-lock.json
+1. **Server Components**: Using Next.js 14 server components to reduce client-side JavaScript
+2. **Image Optimization**: Automatic image optimization via Next.js Image component
+3. **Route Prefetching**: Preloading linked pages for faster navigation
+4. **Edge Caching**: Leveraging Vercel's edge network for faster content delivery
+5. **Optimized Database Queries**: Efficient Prisma queries with proper relations and selections
+
+## Using Bun (Recommended)
+
+[Bun](https://bun.sh) is recommended over npm for this project. Bun is an all-in-one JavaScript runtime & toolkit designed for speed, complete with a bundler, test runner, and Node.js-compatible package manager.
+
+- **Installation**: Follow the instructions at https://bun.sh to install Bun locally
+- **Usage**: Use `bun` instead of `npm` for all package.json commands
+- **Lock File**: The project uses `bun.lock` instead of `package-lock.json`
+- **Performance**: Bun provides significantly faster installation and development server startup times
