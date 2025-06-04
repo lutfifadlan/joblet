@@ -4,7 +4,7 @@ const LOGO_PNG = '/logo.png';
 const Common = {
   title: "Joblet",
   description: "Simple job board platform for job seekers and employers",
-  tagline: "Find your next job in seconds, not days",
+  tagline: "Post jobs in seconds, get applications in minutes",
   image: LOGO_PNG,
   logo: LOGO_PNG,
   liveLogo: `${WEBSITE_URL}/logo.png`,
@@ -34,7 +34,8 @@ const Document = {
 }
 
 const Landing = {
-  headline: "Find your next job in seconds, not days",
+  headline: "Hire or Get Hired. Simple.",
+  subHeadline: "Browse quality job listings or post your opening in seconds.",
 }
 
 const Email = {

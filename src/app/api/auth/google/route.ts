@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    return NextResponse.redirect(data.url);
+    return NextResponse.json({ data });
   } catch (error: unknown) {
     let errorMessage = 'Failed to initiate Google sign-in';
     if (error instanceof Error) {

@@ -23,11 +23,12 @@ export async function GET(req: NextRequest) {
     const supabase = await createClient();
     
     // Exchange the code for a session
-    // We need to explicitly call getSession to ensure the session is properly set
-    const { data, error: sessionError } = await supabase.auth.getSession();
+    // The code is automatically handled by Supabase when it's in the URL
+    // We need to explicitly call exchangeCodeForSession to process the OAuth code
+    const { data, error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
     
     if (sessionError || !data.session) {
-      throw new Error(sessionError?.message || 'Failed to get session');
+      throw new Error(sessionError?.message || 'Failed to exchange code for session');
     }
     
     // Redirect to dashboard or specified redirect URL after successful authentication
