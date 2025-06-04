@@ -43,13 +43,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/companies" className="text-sm text-muted-foreground hover:text-foreground">
-                  Companies
+                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                  Companies (Future)
                 </Link>
               </li>
               <li>
-                <Link href="/saved-jobs" className="text-sm text-muted-foreground hover:text-foreground">
-                  Saved Jobs
+                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                  Saved Jobs (Future)
                 </Link>
               </li>
             </ul>
@@ -68,22 +68,12 @@ export default function Footer() {
                   Dashboard
                 </Link>
               </li>
-              <li>
-                <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
-                  Pricing
-                </Link>
-              </li>
             </ul>
           </div>
           
           <div className="space-y-3">
             <h3 className="font-medium">Company</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">
-                  About Us
-                </Link>
-              </li>
               <li>
                 <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">
                   Contact
