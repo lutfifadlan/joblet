@@ -39,12 +39,20 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Check if the path is for job edit or post pages which require authentication
+  const isProtectedJobPath =
+    request.nextUrl.pathname.startsWith("/jobs/edit/") ||
+    request.nextUrl.pathname.startsWith("/jobs/post");
+
+  // Public paths: home, auth pages, job listings
+  // Protected paths: everything else including job edit/post pages
   if (
-    request.nextUrl.pathname !== "/" &&
     !user &&
+    request.nextUrl.pathname !== "/" &&
     !request.nextUrl.pathname.startsWith("/auth/signin") &&
     !request.nextUrl.pathname.startsWith("/api/auth/callback") &&
-    !request.nextUrl.pathname.startsWith("/api/auth/google")
+    !request.nextUrl.pathname.startsWith("/api/auth/google") &&
+    (!request.nextUrl.pathname.startsWith("/jobs") || isProtectedJobPath)
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
