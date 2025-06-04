@@ -6,7 +6,6 @@ export async function GET(req: NextRequest) {
   const code = requestUrl.searchParams.get('code');
   const error = requestUrl.searchParams.get('error');
   const error_description = requestUrl.searchParams.get('error_description');
-  const redirectTo = requestUrl.searchParams.get('redirectTo') || '/dashboard';
   
   // Handle OAuth error
   if (error) {
@@ -31,8 +30,8 @@ export async function GET(req: NextRequest) {
       throw new Error(sessionError?.message || 'Failed to exchange code for session');
     }
     
-    // Redirect to dashboard or specified redirect URL after successful authentication
-    return NextResponse.redirect(`${requestUrl.origin}${redirectTo}`);
+    // Redirect to dashboard after successful authentication
+    return NextResponse.redirect(`${requestUrl.origin}/dashboard`);
   } catch (error: unknown) {
     console.error('Error in auth callback:', error);
     let errorMessage = 'Authentication failed';
