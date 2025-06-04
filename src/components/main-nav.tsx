@@ -9,6 +9,7 @@ import { LogIn, Menu, X, LogOut, LayoutDashboard, Briefcase } from 'lucide-react
 import Image from 'next/image';
 import { Common } from '@/constants';
 import { showErrorToast, showSuccessToast } from '@/lib/toast';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function MainNav() {
   const pathname = usePathname();
@@ -152,6 +153,9 @@ export function MainNav() {
               </Link>
             );
           })}
+          <div className="ml-2">
+            <ThemeToggle />
+          </div>
         </nav>
 
         {/* Mobile menu button */}
@@ -212,6 +216,9 @@ export function MainNav() {
                   </Link>
                 );
               })}
+              <div className="mt-2">
+                <ThemeToggle />
+              </div>
             </nav>
           </div>
         )}

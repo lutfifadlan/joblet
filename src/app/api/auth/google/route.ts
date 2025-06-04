@@ -1,16 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const requestUrl = new URL(req.url);
-    const redirectTo = requestUrl.searchParams.get('redirectTo') || '/dashboard';
     const supabase = await createClient();
-    
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',

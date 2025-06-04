@@ -22,16 +22,14 @@ export async function GET(req: NextRequest) {
     const supabase = await createClient();
     
     // Exchange the code for a session
-    // The code is automatically handled by Supabase when it's in the URL
-    // We need to explicitly call exchangeCodeForSession to process the OAuth code
     const { data, error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
-    
+        
     if (sessionError || !data.session) {
       throw new Error(sessionError?.message || 'Failed to exchange code for session');
     }
     
-    // Redirect to dashboard after successful authentication
-    return NextResponse.redirect(`${requestUrl.origin}/dashboard`);
+    // Redirect to the specified destination or dashboard by default
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`);
   } catch (error: unknown) {
     console.error('Error in auth callback:', error);
     let errorMessage = 'Authentication failed';
