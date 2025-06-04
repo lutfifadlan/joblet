@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
-import { LogIn, Menu, X, LogOut, LayoutDashboard } from 'lucide-react';
+import { LogIn, Menu, X, LogOut, LayoutDashboard, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 import { Common } from '@/constants';
 import { showErrorToast, showSuccessToast } from '@/lib/toast';
@@ -76,6 +76,13 @@ export function MainNav() {
       active: pathname === '/dashboard',
       icon: <LayoutDashboard className="h-4 w-4 mr-2" />,
       showWhenAuthenticated: true
+    },
+    {
+      href: '/jobs',
+      label: 'Jobs',
+      active: pathname === '/jobs',
+      icon: <Briefcase className="h-4 w-4 mr-2" />,
+      showAlways: true
     },
     {
       href: '/auth/signin',

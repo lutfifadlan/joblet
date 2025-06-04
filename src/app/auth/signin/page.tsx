@@ -126,10 +126,24 @@ const SignIn: React.FC = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      window.location.href = '/api/auth/google';
+      setIsLoading(true);
+      const response = await fetch('/api/auth/google');
+      const result = await response.json();
+      
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      
+      if (result.data && result.data.url) {
+        // Redirect to the OAuth URL provided by Supabase
+        window.location.href = result.data.url;
+      } else {
+        throw new Error('Invalid response from server');
+      }
     } catch (error) {
       console.error(error);
       toast.error("Failed to initiate Google sign-in. Please try again.");
+      setIsLoading(false);
     }
   };
 
