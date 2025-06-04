@@ -95,7 +95,7 @@ const SignUp: React.FC = () => {
         </div>
         <div className="relative z-10 max-w-lg text-center flex flex-col items-center">
           <blockquote className="text-2xl md:text-3xl font-semibold leading-snug mb-6 drop-shadow-lg">
-            “Opportunities don't happen. You create them.”
+            “Opportunities don&apos;t happen. You create them.”
           </blockquote>
           <span className="block text-lg font-medium opacity-90">- Chris Grosser</span>
         </div>

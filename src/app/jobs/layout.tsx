@@ -1,4 +1,3 @@
-import Footer from "@/components/footer";
 import { MainNav } from "@/components/main-nav";
 
 export default function Layout({
