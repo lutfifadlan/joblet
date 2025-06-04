@@ -43,21 +43,31 @@ export async function updateSession(request: NextRequest) {
   const isProtectedJobPath =
     request.nextUrl.pathname.startsWith("/jobs/edit/") ||
     request.nextUrl.pathname.startsWith("/jobs/post");
+    
+  // Check if the path is the public jobs listing page
+  const isPublicJobsPath = request.nextUrl.pathname === "/jobs";
 
   // Public paths: home, auth pages, job listings
   // Protected paths: everything else including job edit/post pages
-  // Allow both GET and POST requests to /auth/signin
   const isAuthSignin = request.nextUrl.pathname.startsWith("/auth/signin");
   const isAuthCallback = request.nextUrl.pathname.startsWith("/api/auth/callback");
   const isAuthGoogle = request.nextUrl.pathname.startsWith("/api/auth/google");
   
+  // Allow all requests to auth endpoints regardless of method
+  if (isAuthSignin || isAuthCallback || isAuthGoogle) {
+    return NextResponse.next();
+  }
+  
+  // Allow access to public jobs page without authentication
+  if (isPublicJobsPath) {
+    return NextResponse.next();
+  }
+  
   if (
     !user &&
     request.nextUrl.pathname !== "/" &&
-    !isAuthSignin &&
-    !isAuthCallback &&
-    !isAuthGoogle &&
-    (!request.nextUrl.pathname.startsWith("/jobs") || isProtectedJobPath)
+    !isPublicJobsPath &&
+    isProtectedJobPath
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
