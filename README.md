@@ -8,7 +8,7 @@ Joblet is a modern job board application built with Next.js, Prisma, and Supabas
 
 ## Live Demo
 
-[View the live demo](https://joblet.vercel.app)
+[View the live demo](https://joblet-omega.vercel.app)
 
 ## Features
 
@@ -82,7 +82,10 @@ Joblet is a modern job board application built with Next.js, Prisma, and Supabas
     /api               # API routes
     /dashboard         # User dashboard
     /jobs              # Job listings and details
-    /signin            # Authentication pages
+    /auth              # Authentication pages
+    /contact-us        # Contact page
+    /privacy-policy    # Privacy policy page
+    /terms-of-service  # Terms of service page
   /components          # Reusable UI components
   /lib                 # Utility functions and shared code
   /types               # TypeScript type definitions
