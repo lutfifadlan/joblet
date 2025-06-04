@@ -1,7 +1,5 @@
 const WEBSITE_URL = 'https://joblet.lutfifadlan.com';
 const LOGO_PNG = '/logo.png';
-const GOOGLE_ANALYTICS_ID = '';
-const GOOGLE_SITE_VERIFICATION_CONTENT = '';
 
 const Common = {
   title: "Joblet",
@@ -17,12 +15,7 @@ const Document = {
   title: Common.title,
   description: Common.description,
   fontUrl: 'https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Poppins:wght@300;400;600&family=Work+Sans:wght@300;400;600&family=Bricolage+Grotesque:wght@400;500;600;700&display=swap',
-  scripts: {
-    autoBackLink: `https://autoback.link/autobacklink.js?ref=${WEBSITE_URL}`,
-    gtagId: GOOGLE_ANALYTICS_ID,
-  },
   meta: {
-    googleSiteVerificationContent: GOOGLE_SITE_VERIFICATION_CONTENT,
     keywordsContent:
       `joblet,
       joblet job board,

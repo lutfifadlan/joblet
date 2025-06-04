@@ -37,7 +37,7 @@ export function AppSidebar() {
         throw new Error("Logout failed");
       }
       // Optionally clear client-side state here if needed
-      router.push("/signin");
+      router.push("/auth/signin");
     } catch {
       toast.error("Failed to logout");
       // Do NOT redirect to /signin if logout fails, to avoid redirect loop
