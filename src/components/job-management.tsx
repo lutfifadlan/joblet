@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Job, JobsResponse } from '@/types/job';
+import { Post } from '@prisma/client';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ import {
 
 export const JobManagement = () => {
   const router = useRouter();
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const [jobs, setJobs] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,7 +40,7 @@ export const JobManagement = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch jobs');
       }
-      const data: JobsResponse = await response.json();
+      const data = await response.json();
       setJobs(data.jobs);
       setCurrentPage(data.current_page);
       setTotalPages(Math.ceil(data.total_count / data.page_size));
@@ -108,7 +108,7 @@ export const JobManagement = () => {
   };
 
   // Render job card
-  const renderJobCard = (job: Job) => (
+  const renderJobCard = (job: Post) => (
     <Card key={job.id} className="h-full flex flex-col hover:shadow-md transition-shadow">
       <CardHeader>
         <div className="flex justify-between items-start">
@@ -137,7 +137,7 @@ export const JobManagement = () => {
       </CardContent>
       <CardFooter className="flex justify-between border-t pt-4">
         <div className="text-xs text-muted-foreground">
-          Posted: {formatDate(job.createdAt)}
+          Posted: {formatDate(job.createdAt.toString())}
         </div>
         <div className="flex gap-2">
           <Button 

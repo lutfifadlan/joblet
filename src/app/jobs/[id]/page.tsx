@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Job } from '@/types/job';
+import { Post } from '@prisma/client';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,7 @@ import { useParams } from 'next/navigation';
 
 export default function JobDetailPage() {
   const params = useParams();
-  const [job, setJob] = useState<Job | null>(null);
+  const [job, setJob] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -172,7 +172,7 @@ export default function JobDetailPage() {
                   <Calendar className="mr-2 h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
                     <h4 className="font-medium">Posted On</h4>
-                    <p>{formatDate(job.createdAt)}</p>
+                    <p>{formatDate(job.createdAt.toString())}</p>
                   </div>
                 </div>
               </div>

@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { showSuccessToast, showWarningToast, showErrorToast } from "@/lib/toast";
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { Job } from '@/types/job';
+import { Post } from '@prisma/client';
 import { AuthGuard } from '@/components/auth-guard';
 import Loading from '@/components/loading-component';
 import { useParams } from 'next/navigation';
@@ -43,7 +43,7 @@ export default function EditJobPage() {
           }
           throw new Error('Failed to fetch job details');
         }
-        const job: Job = await response.json();
+        const job: Post = await response.json();
         
         // Set form data from job
         setFormData({
