@@ -5,13 +5,12 @@ export async function GET(req: NextRequest) {
   try {
     const requestUrl = new URL(req.url);
     const redirectTo = requestUrl.searchParams.get('redirectTo') || '/dashboard';
-    
     const supabase = await createClient();
     
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${requestUrl.origin}/api/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',

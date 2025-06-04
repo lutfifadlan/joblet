@@ -1,22 +1,19 @@
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-
-const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
+import { createClient } from "@/lib/supabase/server";
 
 export async function PUT(request: NextRequest) {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("jc_token")?.value;
     const body = await request.json();
     const { name, email, password } = body;
+    const supabase = await createClient();
+    const { data: { session }, error: authError } = await supabase.auth.getSession();
 
-    const response = await fetch(`${BACKEND_URL}/api/v1/users`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name, email, password }),
-    });
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
+    if (authError || !session) {
+        return NextResponse.json(
+            { error: 'Unauthorized' },
+            { status: 401 }
+        );
+    }
+
+    const response = await supabase.from('users').update({ name, email, password }).eq('id', session.user.id);
+    return NextResponse.json(response, { status: response.status });
 }
