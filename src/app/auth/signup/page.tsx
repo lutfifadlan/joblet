@@ -95,9 +95,9 @@ const SignUp: React.FC = () => {
         </div>
         <div className="relative z-10 max-w-lg text-center flex flex-col items-center">
           <blockquote className="text-2xl md:text-3xl font-semibold leading-snug mb-6 drop-shadow-lg">
-            “The best way to get better at programming is to write more code”
+            “Opportunities don't happen. You create them.”
           </blockquote>
-          <span className="block text-lg font-medium opacity-90">- John Carmack</span>
+          <span className="block text-lg font-medium opacity-90">- Chris Grosser</span>
         </div>
       </div>
       {/* Right: Sign Up Frame */}

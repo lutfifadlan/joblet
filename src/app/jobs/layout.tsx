@@ -12,7 +12,6 @@ export default function Layout({
       <div className="relative">
         {children}
       </div>
-      <Footer />
     </>
   );
 }

@@ -166,9 +166,9 @@ const SignIn: React.FC = () => {
         </div>
         <div className="relative z-10 max-w-lg text-center flex flex-col items-center">
           <blockquote className="text-2xl md:text-3xl font-semibold leading-snug mb-6 drop-shadow-lg">
-            “The key to becoming a great programmer is to write a lot of code and read a lot of code.”
+            “The only way to do great work is to love what you do.”
           </blockquote>
-          <span className="block text-lg font-medium opacity-90">– Peter Norvig</span>
+          <span className="block text-lg font-medium opacity-90">– Steve Jobs</span>
         </div>
       </div>
       {/* Right: Sign In Frame */}

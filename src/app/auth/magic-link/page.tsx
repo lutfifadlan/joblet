@@ -64,9 +64,9 @@ const MagicLink: React.FC = () => {
         </div>
         <div className="relative z-10 max-w-lg text-center flex flex-col items-center">
           <blockquote className="text-2xl md:text-3xl font-semibold leading-snug mb-6 drop-shadow-lg">
-            I&apos;m not a great programmer; I&apos;m just a good programmer with great habits.
+            “Hire character. Train skill.”
           </blockquote>
-          <span className="block text-lg font-medium opacity-90">– Kent Back</span>
+          <span className="block text-lg font-medium opacity-90">– Peter Schutz</span>
         </div>
       </div>
       {/* Right: Sign In Frame */}
